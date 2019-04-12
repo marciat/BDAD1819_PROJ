@@ -19,22 +19,20 @@ DROP TABLE IF EXISTS TratamentosConsulta;
 PRAGMA foreign_keys=ON;
 
 CREATE TABLE Posto(
+    id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
     morada TEXT NOT NULL,
-    contacto INTEGER UNIQUE,
-
-    PRIMARY KEY(nome, morada)
+    contacto INTEGER UNIQUE
 );
 
 CREATE TABLE Cliente(
-    codigo TEXT  NOT NULL PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY,
     nome TEXT  NOT NULL,
     dataNasc DATE,
     NIF INTEGER UNIQUE,
     morada TEXT  NOT NULL,
     contacto INTEGER,
-    profissao TEXT  NOT NULL,
-    CHECK (SUBSTR(codigo, 1, 1) == "C")
+    profissao TEXT  NOT NULL
     /*CHECK ( AND (SUBSTR(NIF, 1, 1) == "1" OR SUBSTR(NIF, 1, 1) == "2")
                                                                     AND (((SUBSTR(NIF,1,1) ) +  
                                                                         (SUBSTR(NIF,2,1) ) +  
@@ -72,17 +70,16 @@ CREATE TABLE Cliente(
 );
 
 CREATE TABLE Medico(
-    codigo TEXT  NOT NULL PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY,
     nome TEXT  NOT NULL,
-    especialidade TEXT  NOT NULL,
+    idEspecialidade INTEGER NOT NULL,
     dataNasc DATE,
     NIF INTEGER UNIQUE,
     morada TEXT  NOT NULL,
     contacto INTEGER,
     salario REAL,
-    FOREIGN KEY (especialidade) REFERENCES Especialidade(nome)
-    ON DELETE CASCADE ON UPDATE NO ACTION,
-    CHECK (SUBSTR(codigo, 1, 1) == "M")
+    FOREIGN KEY (idEspecialidade) REFERENCES Especialidade(id)
+    ON DELETE CASCADE ON UPDATE NO ACTION
     /*CHECK ((SUBSTR(NIF, 1, 1) == "1" OR SUBSTR(NIF, 1, 1) == "2")
                                                                     AND (((SUBSTR(NIF,1,1) ) +  
                                                                         (SUBSTR(NIF,2,1) ) +  
@@ -118,133 +115,129 @@ CREATE TABLE Medico(
 );
 
 CREATE TABLE Outro(
-    codigo TEXT  NOT NULL PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY,
     nome TEXT  NOT NULL,
     dataNasc DATE,
     NIF INTEGER UNIQUE,
     morada TEXT  NOT NULL,
     contacto INTEGER,
-    salario REAL,
+    salario REAL CHECK(salario > 0),
     cargo TEXT  NOT NULL,
-    CHECK (SUBSTR(codigo, 1, 1) == "O")
 );
 
 CREATE TABLE Especialidade(
-    nome TEXT NOT NULL PRIMARY KEY UNIQUE
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE HorarioAtendimento(
-    codigoMed TEXT NOT NULL, 
+    id INTEGER PRIMARY KEY,
+    idMed INTEGER NOT NULL, 
     dataAtend DATE,
     horaInicio TIME,
     horaFim TIME,
 
-    PRIMARY KEY(codigoMed, dataAtend),
-
-    FOREIGN KEY (codigoMed) REFERENCES Medico(codigo)
+    FOREIGN KEY (idMed) REFERENCES Medico(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 
 );
 
 CREATE TABLE Animal(
-    codigo TEXT  NOT NULL PRIMARY KEY UNIQUE,
-    codigoCli TEXT NOT NULL,
-    especie TEXT NOT NULL,
+    id INTEGER PRIMARY KEY,
+    idCliente INTEGER NOT NULL,
+    idEspecie INTEGER NOT NULL,
     idade INTEGER,
     nome TEXT NOT NULL,
-    FOREIGN KEY (codigoCli) REFERENCES Cliente(codigo)
+
+    FOREIGN KEY (idCliente) REFERENCES Cliente(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
-    FOREIGN KEY (especie) REFERENCES Especie(nome)
-    ON DELETE CASCADE ON UPDATE NO ACTION,
-    CHECK (SUBSTR(codigo, 1, 1) == "A")
+
+    FOREIGN KEY (idEspecie) REFERENCES Especie(id)
+    ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE Especie(
+    id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL PRIMARY KEY UNIQUE
 );
 
 CREATE TABLE Problema(
-    nome TEXT NOT NULL PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL UNIQUE,
     descricao TEXT NOT NULL
 );
 
 CREATE TABLE HistoricoProblemas(
-    codigoAnimal TEXT NOT NULL,
-    nomeProblema TEXT NOT NULL,
-    
-    PRIMARY KEY(codigoAnimal, nomeProblema),
+    id INTEGER PRIMARY KEY,
+    idAnimal INTEGER NOT NULL,
+    idProblema INTEGER NOT NULL,
 
-    FOREIGN KEY (codigoAnimal) REFERENCES Animal(codigo)
+    FOREIGN KEY (idAnimal) REFERENCES Animal(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
-    FOREIGN KEY (nomeProblema) REFERENCES Problema(nome)
+
+    FOREIGN KEY (idProblema) REFERENCES Problema(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE PossiveisProblemas(
-    nomeEspecie TEXT NOT NULL,
-    nomeProblema TEXT NOT NULL, 
+    id INTEGER PRIMARY KEY,
+    idEspecie INTEGER NOT NULL,
+    idProblema INTEGER NOT NULL, 
     
-    PRIMARY KEY(nomeEspecie, nomeProblema),
-    
-    FOREIGN KEY (nomeEspecie) REFERENCES Especie(nome)
+    FOREIGN KEY (idEspecie) REFERENCES Especie(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
-    FOREIGN KEY (nomeProblema) REFERENCES Problema(nome)
+
+    FOREIGN KEY (idProblema) REFERENCES Problema(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE Tratamento(
-    nomeTratamento TEXT NOT NULL PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY,
+    nomeTratamento TEXT NOT NULL UNIQUE,
     descricao TEXT NOT NULL,
     duracao REAL,
     CHECK (duracao > 0)
 );
 
 CREATE TABLE TratamentosRecomendados(
-    nomeProblema TEXT NOT NULL UNIQUE,
-    nomeTratamento TEXT NOT NULL,
-    PRIMARY KEY(nomeTratamento, nomeProblema),
+    id INTEGER PRIMARY KEY,
+    idProblema INTEGER NOT NULL UNIQUE,
+    idTratamento INTEGER NOT NULL,
 
-    FOREIGN KEY (nomeProblema) REFERENCES Tratamento(nome)
+    FOREIGN KEY (idProblema) REFERENCES Tratamento(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
-    FOREIGN KEY (nomeTratamento) REFERENCES Problema(nome)
+    FOREIGN KEY (idTratamento) REFERENCES Problema(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE Consulta(
+    id INTEGER PRIMARY KEY,
     data_consulta DATE,
-    codigoAnimal TEXT NOT NULL,
-    codigoMed TEXT NOT NULL,
-    codigoCli TEXT NOT NULL,
+    idAnimal INTEGER NOT NULL,
+    idMedico INTEGER NOT NULL,
+    idCliente INTEGER NOT NULL,
     custo REAL,
 
-    PRIMARY KEY (data_consulta, codigoAnimal),
-
-    FOREIGN KEY (codigoAnimal) REFERENCES Animal(codigo)
+    FOREIGN KEY (idAnimal) REFERENCES Animal(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
-    FOREIGN KEY (codigoMed) REFERENCES Medico(codigo)
+    FOREIGN KEY (idMedico) REFERENCES Medico(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
-    FOREIGN KEY (codigoCli) REFERENCES Cliente(codigo)
+    FOREIGN KEY (idCliente) REFERENCES Cliente(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE TratamentosConsulta(
-    data_consulta DATE,
-    codigoAnimal TEXT NOT NULL,
-    nomeTratamento TEXT NOT NULL,
-
-    PRIMARY KEY(data_consulta, codigoAnimal, nomeTratamento),
+    id INTEGER PRIMARY KEY,
+    idConsulta INTEGER NOT NULL,
+    itTratamento INTEGER NOT NULL,    
     
-    
-    FOREIGN KEY (data_consulta) REFERENCES Consulta (data_consulta)
-    ON DELETE CASCADE ON UPDATE NO ACTION,
-    
-    FOREIGN KEY (codigoAnimal) REFERENCES Animal (codigo)
+    FOREIGN KEY (idConsulta) REFERENCES Consulta (id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
-    FOREIGN KEY (nomeTratamento) REFERENCES Tratamento (nomeTratamento)
+    FOREIGN KEY (idTratamento) REFERENCES Tratamento (id)
     ON DELETE CASCADE ON UPDATE NO ACTION 
 );
 
