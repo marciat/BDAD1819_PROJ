@@ -11,6 +11,10 @@ DROP TABLE IF EXISTS HorarioAtendimento;
 DROP TABLE IF EXISTS Problema;
 DROP TABLE IF EXISTS HistoricoProblemas;
 DROP TABLE IF EXISTS PossiveisProblemas;
+DROP TABLE IF EXISTS Tratamento;
+DROP TABLE IF EXISTS TratamentosRecomendados;
+DROP TABLE IF EXISTS Consulta;
+DROP TABLE IF EXISTS TratamentosConsulta;
 
 PRAGMA foreign_keys=ON;
 
@@ -186,5 +190,61 @@ CREATE TABLE PossiveisProblemas(
     ON DELETE CASCADE ON UPDATE NO ACTION,
     FOREIGN KEY (nomeProblema) REFERENCES Problema(nome)
     ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+CREATE TABLE Tratamento(
+    nomeTratamento TEXT NOT NULL PRIMARY KEY UNIQUE,
+    descricao TEXT NOT NULL,
+    duracao REAL,
+    CHECK (duracao > 0)
+);
+
+CREATE TABLE TratamentosRecomendados(
+    nomeProblema TEXT NOT NULL UNIQUE,
+    nomeTratamento TEXT NOT NULL,
+    PRIMARY KEY(nomeTratamento, nomeProblema),
+
+    FOREIGN KEY (nomeProblema) REFERENCES Tratamento(nome)
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+
+    FOREIGN KEY (nomeTratamento) REFERENCES Problema(nome)
+    ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+CREATE TABLE Consulta(
+    data_consulta DATE,
+    codigoAnimal TEXT NOT NULL,
+    codigoMed TEXT NOT NULL,
+    codigoCli TEXT NOT NULL,
+    custo REAL,
+
+    PRIMARY KEY (data_consulta, codigoAnimal),
+
+    FOREIGN KEY (codigoAnimal) REFERENCES Animal(codigo)
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+
+    FOREIGN KEY (codigoMed) REFERENCES Medico(codigo)
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+
+    FOREIGN KEY (codigoCli) REFERENCES Cliente(codigo)
+    ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+CREATE TABLE TratamentosConsulta(
+    data_consulta DATE,
+    codigoAnimal TEXT NOT NULL,
+    nomeTratamento TEXT NOT NULL,
+
+    PRIMARY KEY(data_consulta, codigoAnimal, nomeTratamento),
+    
+    
+    FOREIGN KEY (data_consulta) REFERENCES Consulta (data_consulta)
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+    
+    FOREIGN KEY (codigoAnimal) REFERENCES Animal (codigo)
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+
+    FOREIGN KEY (nomeTratamento) REFERENCES Tratamento (nomeTratamento)
+    ON DELETE CASCADE ON UPDATE NO ACTION 
 );
 
