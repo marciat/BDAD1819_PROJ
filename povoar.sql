@@ -1,5 +1,7 @@
 
 PRAGMA foreign_keys=ON;
+.headers ON
+.mode columns
 
 INSERT INTO Posto(nome, morada, contacto) 
 VALUES 
@@ -128,7 +130,10 @@ VALUES
     ('Trat 3', 'DESC 3', 123),
     ('Trat 4', 'DESC 4', 1234),
     ('Trat 5', 'DESC 5', 12345),
-    ('Trat 6', 'DESC 6', 123456);
+    ('Trat 6', 'DESC 6', 123456),
+    ('Trat 7', 'DESC 7', 1234),
+    ('Trat 8', 'DESC 8', 12345),
+    ('Trat 9', 'DESC 9', 123456);
     
 INSERT INTO TratamentosRecomendados(idProblema, idTratamento)
 VALUES 
@@ -139,7 +144,7 @@ VALUES
     (5, 4),
     (6, 4),
     (5, 5),
-    (2, 2),
+    (7, 2),
     (1, 3);
 
 INSERT INTO Consulta(data_consulta, idAnimal, idMedico, idCliente, custo)

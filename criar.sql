@@ -40,40 +40,6 @@ CREATE TABLE Cliente(
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
     CHECK ((length(contacto) == 9) AND (length(NIF) == 9))
-    /*CHECK ( AND (SUBSTR(NIF, 1, 1) == "1" OR SUBSTR(NIF, 1, 1) == "2")
-                                                                    AND (((SUBSTR(NIF,1,1) ) +  
-                                                                        (SUBSTR(NIF,2,1) ) +  
-                                                                        (SUBSTR(NIF,3,1) ) +  
-                                                                        (SUBSTR(NIF,4,1) ) +  
-                                                                        (SUBSTR(NIF,5,1) ) +  
-                                                                        (SUBSTR(NIF,6,1) ) +  
-                                                                        (SUBSTR(NIF,7,1) ) +  
-                                                                        (SUBSTR(NIF,8,1) ) +  
-                                                                        (SUBSTR(NIF,9,1) ) % 11 == 0)
-                                                                        OR
-                                                                        (CASE   ((SUBSTR(NIF,1,1) ) +  
-                                                                                (SUBSTR(NIF,2,1) ) +  
-                                                                                (SUBSTR(NIF,3,1) ) +  
-                                                                                (SUBSTR(NIF,4,1) ) +  
-                                                                                (SUBSTR(NIF,5,1) ) +  
-                                                                                (SUBSTR(NIF,6,1) ) +  
-                                                                                (SUBSTR(NIF,7,1) ) +  
-                                                                                (SUBSTR(NIF,8,1) ) +  
-                                                                                (SUBSTR(NIF,9,1) ) % 11)
-                                                                        WHEN    1
-                                                                        THEN    (CASE    (SUBSTR(NIF,9,1))
-                                                                                WHEN    0
-                                                                                THEN    (((SUBSTR(NIF,1,1) ) +  
-                                                                                        (SUBSTR(NIF,2,1) ) +  
-                                                                                        (SUBSTR(NIF,3,1) ) +  
-                                                                                        (SUBSTR(NIF,4,1) ) +  
-                                                                                        (SUBSTR(NIF,5,1) ) +  
-                                                                                        (SUBSTR(NIF,6,1) ) +  
-                                                                                        (SUBSTR(NIF,7,1) ) +  
-                                                                                        (SUBSTR(NIF,8,1) ) +  
-                                                                                        (SUBSTR(NIF,9,1) ) + 10) % 11 == 0)
-                                                                                        
-                                                                                        )   )   )   )*/
 );
 
 CREATE TABLE Medico(
@@ -94,38 +60,6 @@ CREATE TABLE Medico(
     ON DELETE CASCADE ON UPDATE NO ACTION,
     
     CHECK ((length(contacto) == 9) AND (length(NIF) == 9))
-    /*CHECK ((SUBSTR(NIF, 1, 1) == "1" OR SUBSTR(NIF, 1, 1) == "2")
-                                                                    AND (((SUBSTR(NIF,1,1) ) +  
-                                                                        (SUBSTR(NIF,2,1) ) +  
-                                                                        (SUBSTR(NIF,3,1) ) +  
-                                                                        (SUBSTR(NIF,4,1) ) +  
-                                                                        (SUBSTR(NIF,5,1) ) +  
-                                                                        (SUBSTR(NIF,6,1) ) +  
-                                                                        (SUBSTR(NIF,7,1) ) +  
-                                                                        (SUBSTR(NIF,8,1) ) +  
-                                                                        (SUBSTR(NIF,9,1) ) % 11 == 0)
-                                                                        OR
-                                                                        (CASE   ((SUBSTR(NIF,1,1) ) +  
-                                                                                (SUBSTR(NIF,2,1) ) +  
-                                                                                (SUBSTR(NIF,3,1) ) +  
-                                                                                (SUBSTR(NIF,4,1) ) +  
-                                                                                (SUBSTR(NIF,5,1) ) +  
-                                                                                (SUBSTR(NIF,6,1) ) +  
-                                                                                (SUBSTR(NIF,7,1) ) +  
-                                                                                (SUBSTR(NIF,8,1) ) +  
-                                                                                (SUBSTR(NIF,9,1) ) % 11)
-                                                                        WHEN    1
-                                                                        THEN    (CASE    (SUBSTR(NIF,9,1))
-                                                                                WHEN    0
-                                                                                THEN    (((SUBSTR(NIF,1,1) ) +  
-                                                                                        (SUBSTR(NIF,2,1) ) +  
-                                                                                        (SUBSTR(NIF,3,1) ) +  
-                                                                                        (SUBSTR(NIF,4,1) ) +  
-                                                                                        (SUBSTR(NIF,5,1) ) +  
-                                                                                        (SUBSTR(NIF,6,1) ) +  
-                                                                                        (SUBSTR(NIF,7,1) ) +  
-                                                                                        (SUBSTR(NIF,8,1) ) +  
-                                                                                        (SUBSTR(NIF,9,1) ) + 10) % 11 == 0)))))*/
 );
 
 CREATE TABLE Outro(
@@ -227,10 +161,10 @@ CREATE TABLE TratamentosRecomendados(
     
     PRIMARY KEY(idProblema, idTratamento),
 
-    FOREIGN KEY (idProblema) REFERENCES Tratamento(id)
+    FOREIGN KEY (idProblema) REFERENCES Problema(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
-    FOREIGN KEY (idTratamento) REFERENCES Problema(id)
+    FOREIGN KEY (idTratamento) REFERENCES Tratamento(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
