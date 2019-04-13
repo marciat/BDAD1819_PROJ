@@ -25,7 +25,8 @@ CREATE TABLE Posto(
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
     morada TEXT NOT NULL,
-    contacto INTEGER UNIQUE
+    contacto INTEGER UNIQUE,
+    CHECK (length(contacto) < 9)
 );
 
 CREATE TABLE Cliente(
@@ -39,7 +40,9 @@ CREATE TABLE Cliente(
     idPosto INTEGER NOT NULL,
 
     FOREIGN KEY (idPosto) REFERENCES Posto(id)
-    ON DELETE CASCADE ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+
+    CHECK ((length(contacto) == 9) && (length(NIF) == 9))
     /*CHECK ( AND (SUBSTR(NIF, 1, 1) == "1" OR SUBSTR(NIF, 1, 1) == "2")
                                                                     AND (((SUBSTR(NIF,1,1) ) +  
                                                                         (SUBSTR(NIF,2,1) ) +  
@@ -91,7 +94,9 @@ CREATE TABLE Medico(
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
     FOREIGN KEY (idEspecialidade) REFERENCES Especialidade(id)
-    ON DELETE CASCADE ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+    
+    CHECK ((length(contacto) == 9) && (length(NIF) == 9))
     /*CHECK ((SUBSTR(NIF, 1, 1) == "1" OR SUBSTR(NIF, 1, 1) == "2")
                                                                     AND (((SUBSTR(NIF,1,1) ) +  
                                                                         (SUBSTR(NIF,2,1) ) +  
@@ -138,7 +143,9 @@ CREATE TABLE Outro(
     idPosto INTEGER NOT NULL,
 
     FOREIGN KEY (idPosto) REFERENCES Posto(id)
-    ON DELETE CASCADE ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+    
+    CHECK ((length(contacto) == 9) && (length(NIF) == 9))
 );
 /*
 CREATE TABLE ClientesPosto(
@@ -281,7 +288,9 @@ CREATE TABLE Consulta(
     ON DELETE CASCADE ON UPDATE NO ACTION,
 
     FOREIGN KEY (idCliente) REFERENCES Cliente(id)
-    ON DELETE CASCADE ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+
+    CHECK (custo >= 0)
 );
 
 CREATE TABLE TratamentosConsulta(
