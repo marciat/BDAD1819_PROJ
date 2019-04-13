@@ -114,7 +114,7 @@ VALUES
     (3, 1),
     (4, 1),
     (5, 1),
-    (3, 1),
+    (3, 2),
     (1, 4),
     (6, 1),
     (1, 1),
@@ -132,15 +132,15 @@ VALUES
     
 INSERT INTO TratamentosRecomendados(idProblema, idTratamento)
 VALUES 
-    (3, 1),
-    (4, 1),
-    (5, 1),
-    (3, 1),
-    (1, 4),
-    (6, 1),
     (1, 1),
-    (7, 1),
-    (2, 1);
+    (2, 3),
+    (3, 2),
+    (4, 5),
+    (5, 4),
+    (6, 4),
+    (5, 5),
+    (2, 2),
+    (1, 3);
 
 INSERT INTO Consulta(data_consulta, idAnimal, idMedico, idCliente, custo)
 VALUES
@@ -159,7 +159,7 @@ VALUES
     (3, 1),
     (4, 1),
     (5, 1),
-    (3, 1),
+    (3, 2),
     (1, 4),
     (6, 1),
     (1, 1),

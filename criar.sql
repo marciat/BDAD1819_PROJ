@@ -160,7 +160,7 @@ CREATE TABLE HorarioAtendimento(
     FOREIGN KEY (idMed) REFERENCES Medico(id)
     ON DELETE CASCADE ON UPDATE NO ACTION
 
-    --CHECK (horaInicio < horaFim)
+    CHECK (horaInicio < horaFim)
 );
 
 CREATE TABLE Animal(
@@ -222,7 +222,7 @@ CREATE TABLE Tratamento(
 );
 
 CREATE TABLE TratamentosRecomendados(
-    idProblema INTEGER NOT NULL UNIQUE,
+    idProblema INTEGER NOT NULL,
     idTratamento INTEGER NOT NULL,
     
     PRIMARY KEY(idProblema, idTratamento),
