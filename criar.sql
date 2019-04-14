@@ -23,17 +23,17 @@ CREATE TABLE Posto(
     nome TEXT NOT NULL,
     morada TEXT NOT NULL,
     contacto INTEGER UNIQUE,
-    CHECK (length(contacto) <= 9)
+    CHECK (length(contacto) == 9)
 );
 
 CREATE TABLE Cliente(
     id INTEGER PRIMARY KEY,
-    nome TEXT  NOT NULL,
+    nome TEXT NOT NULL,
     dataNasc TEXT,
     NIF INTEGER UNIQUE,
-    morada TEXT  NOT NULL,
+    morada TEXT NOT NULL,
     contacto INTEGER,
-    profissao TEXT  NOT NULL,
+    profissao TEXT NOT NULL,
     idPosto INTEGER NOT NULL,
 
     FOREIGN KEY (idPosto) REFERENCES Posto(id)
@@ -76,7 +76,8 @@ CREATE TABLE Outro(
     FOREIGN KEY (idPosto) REFERENCES Posto(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
     
-    CHECK ((length(contacto) == 9) AND (length(NIF) == 9))
+    CHECK ((length(contacto) == 9) AND (length(NIF) == 9) AND (cargo <> 'Medico') AND cargo <> 'MEDICO' AND cargo <> 'medico') 
+                                        
 );
 
 CREATE TABLE Especialidade(
@@ -100,7 +101,7 @@ CREATE TABLE HorarioAtendimento(
 CREATE TABLE Animal(
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
-    idade INTEGER,
+    idade INTEGER NOT NULL,
     idCliente INTEGER NOT NULL,
     idEspecie INTEGER NOT NULL,
 
@@ -170,11 +171,12 @@ CREATE TABLE TratamentosRecomendados(
 
 CREATE TABLE Consulta(
     id INTEGER PRIMARY KEY,
-    data_consulta TEXT,
+    data_consulta TEXT NOT NULL,
+    horaInicio TEXT NOT NULL,
     idAnimal INTEGER NOT NULL,
     idMedico INTEGER NOT NULL,
     idCliente INTEGER NOT NULL,
-    custo REAL,
+    custo REAL DEFAULT 0,
 
     FOREIGN KEY (idAnimal) REFERENCES Animal(id)
     ON DELETE CASCADE ON UPDATE NO ACTION,
