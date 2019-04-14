@@ -88,9 +88,9 @@ CREATE TABLE Especialidade(
 CREATE TABLE HorarioAtendimento(
     id INTEGER PRIMARY KEY,
     idMed INTEGER NOT NULL, 
-    dataAtend TEXT,
-    horaInicio TEXT,
-    horaFim TEXT,
+    dataAtend TEXT NOT NULL,
+    horaInicio TEXT NOT NULL,
+    horaFim TEXT NOT NULL,
 
     FOREIGN KEY (idMed) REFERENCES Medico(id)
     ON DELETE CASCADE ON UPDATE CASCADE
@@ -153,7 +153,7 @@ CREATE TABLE Tratamento(
     id INTEGER PRIMARY KEY,
     nomeTratamento TEXT NOT NULL UNIQUE,
     descricao TEXT NOT NULL,
-    duracao REAL  CHECK (duracao > 0)
+    duracao REAL  CHECK (duracao >= 0)
 );
 
 CREATE TABLE TratamentosRecomendados(
