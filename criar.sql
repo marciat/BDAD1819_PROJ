@@ -29,10 +29,10 @@ CREATE TABLE Posto(
 CREATE TABLE Cliente(
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
-    dataNasc TEXT,
+    dataNasc TEXT NOT NULL,
     NIF INTEGER UNIQUE,
     morada TEXT NOT NULL,
-    contacto INTEGER,
+    contacto INTEGER NOT NULL,
     profissao TEXT NOT NULL,
     idPosto INTEGER NOT NULL,
 
@@ -45,10 +45,10 @@ CREATE TABLE Cliente(
 CREATE TABLE Medico(
     id INTEGER PRIMARY KEY,
     nome TEXT  NOT NULL,
-    dataNasc TEXT,
+    dataNasc TEXT NOT NULL,
     NIF INTEGER UNIQUE,
     morada TEXT  NOT NULL,
-    contacto INTEGER,
+    contacto INTEGER NOT NULL,
     salario REAL CHECK(salario > 0),
     idEspecialidade INTEGER NOT NULL,
     idPosto INTEGER NOT NULL,
@@ -65,10 +65,10 @@ CREATE TABLE Medico(
 CREATE TABLE Outro(
     id INTEGER PRIMARY KEY,
     nome TEXT  NOT NULL,
-    dataNasc TEXT,
+    dataNasc TEXT NOT NULL,
     NIF INTEGER UNIQUE,
     morada TEXT  NOT NULL,
-    contacto INTEGER,
+    contacto INTEGER NOT NULL,
     salario REAL CHECK(salario > 0),
     cargo TEXT  NOT NULL,
     idPosto INTEGER NOT NULL,
