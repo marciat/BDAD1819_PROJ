@@ -1,0 +1,27 @@
+DROP TRIGGER IF EXISTS NIFUnicoCliente;
+
+CREATE TRIGGER NIFUnicoCliente
+BEFORE INSERT ON Cliente
+WHEN NEW.NIF IN 
+(SELECT NIF FROM Medico INNER JOIN Outro)
+SELECT raise(rollback, 'NIF nao unico');
+
+
+
+DROP TRIGGER IF EXISTS NIFUnicoMedico;
+
+CREATE TRIGGER NIFUnicoMedico
+BEFORE INSERT ON Medico
+WHEN NEW.NIF IN 
+(SELECT NIF FROM Cliente INNER JOIN Outro)
+SELECT raise(rollback, 'NIF nao unico');
+
+
+
+DROP TRIGGER IF EXISTS NIFUnicoOutro;
+
+CREATE TRIGGER NIFUnicoOutro
+BEFORE INSERT ON Outro
+WHEN NEW.NIF IN 
+(SELECT NIF FROM Cliente INNER JOIN Medico)
+SELECT raise(rollback, 'NIF nao unico');

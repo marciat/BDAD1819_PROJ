@@ -1,0 +1,3 @@
+DROP TRIGGER NIFUnicoCliente;
+DROP TRIGGER NIFUnicoMedico;
+DROP TRIGGER NIFUnicoOutro;
