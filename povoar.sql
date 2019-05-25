@@ -11,9 +11,9 @@ VALUES
 
  INSERT INTO Cliente(nome, dataNasc, NIF, morada, contacto, profissao, idPosto)
  VALUES
-    ('Cliente1', '1986-05-01', 987456321, 'Morada C1', 987456321, 'Profissao C1', 1),
-    ('Cliente2', '1997-05-02', 121212121, 'Morada C2', 121212121, 'Profissao C2', 1),
-    ('Cliente3', '1976-05-03', 333333333, 'Morada C3', 131313131, 'Profissao C3', 1),
+    ('Manuel', '1986-05-01', 987456321, 'Morada C1', 987456321, 'Profissao C1', 1),
+    ('Miguel', '1997-05-02', 121212121, 'Morada C2', 121212121, 'Profissao C2', 1),
+    ('Maria', '1976-05-03', 333333333, 'Morada C3', 131313131, 'Profissao C3', 1),
     ('Cliente4', '1958-05-04', 444444444, 'Morada C4', 141414141, 'Profissao C4', 1),
     ('Cliente5', '1987-05-05', 555555555, 'Morada C5', 151515151, 'Profissao C5', 2),
     ('Cliente6', '1979-05-06', 666666666, 'Morada C6', 161616161, 'Profissao C6', 2),
@@ -38,7 +38,7 @@ VALUES
 
 INSERT INTO Medico(nome, idEspecialidade, dataNasc, NIF, morada, contacto, salario, idPosto)
 VALUES
-    ('Medico1', 1, '1986-05-01', 123456789, 'Morada C1', 112345678, 1000, 1),
+    ('Maria', 1, '1986-05-01', 123456789, 'Morada C1', 112345678, 1000, 1),
     ('Medico2', 3, '1997-05-02', 223456789, 'Morada C2', 122345678, 1500, 2),
     ('Medico3', 2, '1976-05-03', 323456789, 'Morada C3', 132345678, 2000, 1),
     ('Medico4', 2, '1958-05-04', 423456789, 'Morada C4', 142345678, 2100, 2),
@@ -59,7 +59,7 @@ VALUES
 
 INSERT INTO Outro(nome, dataNasc, NIF, morada, contacto, salario, cargo, idPosto)
 VALUES
-    ('Outro1', '1986-05-01', 123466789, 'Morada C1', 123456781, 1000, 'Cargo O1', 1),
+    ('Miguel', '1986-05-01', 123466789, 'Morada C1', 123456781, 1000, 'Cargo O1', 1),
     ('Outro2', '1997-05-02', 223446789, 'Morada C2', 122345678, 1500, 'Cargo O2', 1),
     ('Outro3', '1976-05-03', 323236789, 'Morada C3', 123476789, 2000, 'Cargo O3', 1),
     ('Outro4', '1958-05-04', 423456789, 'Morada C4', 123456784, 2100, 'Cargo O4', 1),
@@ -89,7 +89,7 @@ VALUES
     ('Especie7'),
     ('Especie8'),
     ('Especie9');
-
+    
 INSERT INTO Animal(nome, idade, idEspecie, idCliente)
 VALUES 
     ('Animal1', 3, 1, 1),
@@ -159,15 +159,15 @@ VALUES
     (2, 18),
     (3, 6),
     (4, 1),
-    (5, 4),
-    (6, 1),
+    (1, 4),
+    (6, 6),
     (7, 2),
     (8, 11),
     (9, 3),
-    (11, 12),
-    (12, 1),
+    (1, 12),
+    (12, 1),    
     (13, 6),
-    (14, 1),
+    (14, 6),
     (15, 4),
     (16, 9),
     (17, 2),
@@ -241,7 +241,7 @@ INSERT INTO Consulta(data_consulta, horaInicio, idAnimal, idMedico, idCliente, c
 VALUES
     ('2019-03-01','20:20:01', 1, 2, 11, 1),
     ('2020-03-01','20:20:01', 16, 1, 12, 2),
-    ('2020-03-02','20:20:01', 8, 1, 1, 3),
+    ('2020-03-01','19:20:01', 8, 1, 1, 3),
     ('2020-03-03','20:20:01', 1, 4, 1, 4),
     ('2019-03-04','20:20:01', 3, 1, 11, 5),
     ('2019-03-06','20:20:01', 11, 13, 16, 6),
@@ -269,9 +269,9 @@ VALUES
     (3, 1),
     (3, 2),
     (3, 7),
-    (4, 1),
+    (4, 3),
     (5, 1),
-    (6, 1),
+    (6, 4),
     (7, 1),
     (4, 2),
     (5, 2),

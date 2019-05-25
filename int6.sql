@@ -2,15 +2,7 @@
 .headers on
 .nullvalue NULL
 
-SELECT	id, nome, contacto
-FROM	Cliente c
-WHERE	c.id IN	(SELECT idCliente
-				 FROM	Animal a
-				 WHERE 	a.id IN (SELECT	idAnimal
-								 FROM Consulta co
-								 WHERE co.idMedico IN 	(SELECT id
-														 FROM Medico m
-														 WHERE m.salario > 2000
-														) 	
-								)
-				);
+SELECT	c.id, c.nome, c.contacto
+FROM	Cliente c INNER JOIN Animal a INNER JOIN Consulta co INNER JOIN Medico m 
+ON c.id = a.idCliente AND a.id = co.idAnimal AND co.idMedico = m.id
+WHERE	m.salario > 2000
