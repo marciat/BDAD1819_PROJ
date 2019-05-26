@@ -180,8 +180,8 @@ INSERT INTO HistoricoProblemas(idAnimal, idProblema)
 VALUES 
     (1, 1),
     (2, 4),
-    (3, 13),
-    (4, 1),
+    (3, 1),
+    (4, 13),
     (1, 4),
     (6, 14),
     (7, 13),
