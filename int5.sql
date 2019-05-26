@@ -2,14 +2,14 @@
 .headers on
 .nullvalue NULL
 
-SELECT NIF
+SELECT nome,NIF
 FROM Cliente
 WHERE idPosto = 1
 UNION
-SELECT NIF
+SELECT nome,NIF
 FROM Medico
 WHERE idPosto = 1
 UNION
-SELECT NIF
+SELECT nome,NIF
 FROM Outro
 WHERE idPosto = 1;
