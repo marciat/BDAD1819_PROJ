@@ -24,7 +24,7 @@ SELECT * FROM Outro;
 INSERT INTO Outro(nome, dataNasc, NIF, morada, contacto, salario, cargo, idPosto) VALUES ('Maria',      '1978-09-05',   555555556,  'Rua da Maria',     912345678,  3000,   'Oi',   1); /* possible */
 INSERT INTO Outro(nome, dataNasc, NIF, morada, contacto, salario, cargo, idPosto) VALUES ('Joaquim',    '1980-10-30',   555555555,  'Rua do Joaquim',   922871837,  2000,   'Oi',   2); /* not possible */
 INSERT INTO Outro(nome, dataNasc, NIF, morada, contacto, salario, cargo, idPosto) VALUES ('Joao',       '1999-12-17',   923456786,  'Rua do Joao',      965272674,  1500,   'Oi',   1); /* possible */
-INSERT INTO Outro(nome, dataNasc, NIF, morada, contacto, salario, cargo, idPosto) VALUES ('Pedro',      '1980-04-20',   555555556,  'Rua do Pedro',     912347986,  2300,   'Oi',   2); /* not possible */
+INSERT INTO Outro(nome, dataNasc, NIF, morada, contacto, salario, cargo, idPosto) VALUES ('Pedro',      '1980-04-20',   555555554,  'Rua do Pedro',     912347986,  2300,   'Oi',   2); /* not possible */
 
 
 SELECT * FROM Outro;
