@@ -7,11 +7,17 @@ FROM Animal a INNER JOIN HistoricoProblemas h, Animal a2
 ON a.id = h.idAnimal
 WHERE a.idade = 5 AND a2.idade = 5*/
     
-SELECT count(DISTINCT(a.id)) AS numAnimais, 
+/*SELECT count(DISTINCT(a.id)) AS numAnimais, 
        CAST(count(DISTINCT(h.idProblema)) AS REAL)/CAST(count(DISTINCT(a.id)) AS REAL) AS mediaProblemasIdade
 FROM Animal a, HistoricoProblemas h
 WHERE (a.idade = 10 AND (h.idAnimal = a.id)) OR (a.idade = 10 AND a.id NOT IN (SELECT idAnimal
-                                                             FROM HistoricoProblemas))
+                                                             FROM HistoricoProblemas))*/
+
+SELECT count(DISTINCT(a.id)) AS numAnimais,
+CAST(count(DISTINCT(h.idProblema)) AS REAL)/count(DISTINCT(a.id)) AS mediaProblemasIdade
+FROM Animal a, HistoricoProblemas h
+WHERE (h.idAnimal IN (SELECT id FROM Animal WHERE idade = 8)) AND a.idade = 8 
+
 
 
 /*
