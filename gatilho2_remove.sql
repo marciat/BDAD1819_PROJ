@@ -1,1 +1,1 @@
-DROP TRIGGER HoraConsultas;
+DROP TRIGGER IF EXISTS HoraConsultas;

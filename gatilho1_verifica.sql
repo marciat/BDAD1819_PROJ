@@ -1,3 +1,5 @@
+SELECT * FROM HistoricoProblemas;
+
 INSERT INTO HistoricoProblemas VALUES (3, 10); /* not possible */
 INSERT INTO HistoricoProblemas VALUES (8, 1); /* possible */
 INSERT INTO HistoricoProblemas VALUES (15, 11); /* not possible */

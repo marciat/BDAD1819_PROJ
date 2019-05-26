@@ -1,1 +1,1 @@
-DROP TRIGGER ProblemasAnimais;
+DROP TRIGGER IF EXISTS ProblemasAnimais;
