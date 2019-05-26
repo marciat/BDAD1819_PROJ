@@ -1,3 +1,5 @@
+
+PRAGMA foreign_keys=ON;
 SELECT * FROM HistoricoProblemas;
 
 INSERT INTO HistoricoProblemas VALUES (3, 10); /* not possible */

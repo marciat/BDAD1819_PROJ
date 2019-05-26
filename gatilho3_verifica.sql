@@ -1,4 +1,6 @@
-SELECT * FROM TABLE Cliente;
+
+PRAGMA foreign_keys=ON;
+SELECT * FROM Cliente;
 
 INSERT INTO Cliente VALUES
 ('Maria', '1978-09-05', 555555555, 'Rua da Maria', 912345678, 'Enfermeira', 1), /* not possible */
@@ -7,10 +9,10 @@ INSERT INTO Cliente VALUES
 ('Pedro', '1980-04-20', 823456789, 'Rua do Pedro', 912347986, 'Contabilista', 2), /* not possible */
 ('Lucas', '1977-05-04', 234567887, 'Rua do Lucas', 939456789, 'Mecanico', 1); /* possible */
 
-SELECT * FROM TABLE Cliente;
+SELECT * FROM Cliente;
 
 
-SELECT * FROM TABLE Medico;
+SELECT * FROM Medico;
 
 INSERT INTO Medico VALUES
 ('Maria', 1, '1978-09-05', 555555555, 'Rua da Maria', 912345678, 3000, 1), /* not possible */
@@ -19,10 +21,10 @@ INSERT INTO Medico VALUES
 ('Pedro', 2, '1980-04-20', 888888348, 'Rua do Pedro', 912347986, 2300, 2), /* not possible */
 ('Lucas', '1977-05-04', 234567889, 'Rua do Lucas', 939456789, 'Mecanico', 1); /* possible */
 
-SELECT * FROM TABLE Medico;
+SELECT * FROM Medico;
 
 
-SELECT * FROM TABLE Outro;
+SELECT * FROM Outro;
 
 INSERT INTO Outro VALUES
 ('Maria', 1, '1978-09-05', 555555555, 'Rua da Maria', 912345678, 3000, 1), /* not possible */
@@ -32,4 +34,4 @@ INSERT INTO Outro VALUES
 ('Lucas', '1977-05-04', 234588889, 'Rua do Lucas', 939456789, 'Mecanico', 1); /* possible */
 
 
-SELECT * FROM TABLE Outro;
+SELECT * FROM Outro;

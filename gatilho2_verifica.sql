@@ -1,4 +1,6 @@
-SELECT * FROM TABLE Consulta;
+
+PRAGMA foreign_keys=ON;
+SELECT * FROM Consulta;
 
 INSERT INTO Consulta VALUES
 ('2020-03-01', '20:20:01', 1, 1, 1, 1), /* not possible */
@@ -8,4 +10,4 @@ INSERT INTO Consulta VALUES
 ('2020-06-07', '20:20:01', 3, 3, 1, 1); /* possible */
 
 
-SELECT * FROM TABLE Consulta;
+SELECT * FROM Consulta;
