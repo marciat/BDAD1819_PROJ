@@ -2,6 +2,9 @@
 .headers on
 .nullvalue NULL
 
-SELECT	idProblema
-FROM	HistoricoProblemas
-WHERE	idAnimal = 1;
+SELECT id, nome 
+FROM Problema 
+WHERE id IN (   SELECT	idProblema
+                FROM	HistoricoProblemas
+                WHERE	idAnimal = 1)
+
